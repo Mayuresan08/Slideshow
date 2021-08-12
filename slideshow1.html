@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<style>
+.container{
+    max-width: 45rem;
+
+  position: relative;
+  margin: auto;
+}
+#image{
+    width:100%;
+    height:20rem;
+    transition:  all .1s ease-in-out;
+    animation-duration: 2s;
+    animation-name:fade ;
+     animation-iteration-count:infinite ;
+     
+
+
+}
+
+#image:hover{
+    transform: scale(1.1);
+    animation-play-state: paused;
+}
+
+@keyframes fade {
+   50%{
+       opacity:0.8;
+       transform:translateY(-0.5rem);
+     }
+    
+}
+
+.previous{
+position: absolute;
+top: 50%;
+}
+.next{
+    position: absolute;
+    top: 50%;
+    left: 98%;
+
+}
+.fa-chevron-left ,.fa-chevron-right{
+    cursor: pointer;
+    color: rgb(100, 104, 104);
+    font-size: x-large;
+    width:1rem;
+}
+.fa-chevron-left:hover ,.fa-chevron-right:hover{
+    background-color: rgb(49, 43, 43);
+}
+
+
+
+</style>
+
+<body>
+    <div class=container>
+       <div class="img fade"><img  src="Images/pexels-irina-iriser-1408221.jpg" onmouseover="pauseTurn()"  onmouseleave="resumeTurn()" onmouseout="slide()" id="image"   ></div>
+       <div  class="previous"><a  onclick="previousTurn()"><i  class="fas fa-chevron-left"></i></i></a></div>
+       <div  class="next"><a onclick="nextTurn()"><i  class="fas fa-chevron-right"></i></i></a></div>
+    </div>
+   
+   
+   
+   
+   
+   
+   
+   
+   <script>
+        let imageSrc=['images/pexels-eberhard-grossgasteiger-844297.jpg','images/pexels-johannes-plenio-2850287.jpg','Images/pexels-asad-photo-maldives-457881.jpg','Images/pexels-irina-iriser-1408221.jpg','Images/pexels-pok-rie-697313.jpg']
+        let i=0;
+        let imageTurn
+        turn=()=>
+           { 
+            console.log(i)
+            if(i < imageSrc.length)
+            {  
+            
+            document.getElementById('image').src=imageSrc[i];
+            i++;
+            }
+            else{
+                i=0;
+            }
+           }
+         imageTurn=setInterval(turn,2000);
+         function pauseTurn() {
+           clearInterval(imageTurn);
+         }
+         function resumeTurn()
+         {
+            imageTurn=setInterval(turn,2000);
+         }
+         function previousTurn(){
+            
+             clearInterval(imageTurn);
+             if(i > 0)
+             {   
+                i=i-1;
+                 document.getElementById('image').src=imageSrc[i] 
+             }
+             else{
+               i=4
+                 document.getElementById('image').src=imageSrc[i]
+             }
+    
+              imageTurn=setInterval(turn,2000);
+         }
+         function nextTurn(){
+            console.log(i)
+             clearInterval(imageTurn);
+             if(i == 4  )
+             {   
+                 i=0;
+                 document.getElementById('image').src=imageSrc[i] 
+             }
+             else{
+                 i=i+1;
+                 document.getElementById('image').src=imageSrc[i]
+             }
+             console.log(i)
+              imageTurn=setInterval(turn,2000);
+         }
+
+         function slide()
+         {
+             x=document.getElementById('image');
+             x.className="fade"
+         }
+        </script>
+</body>
+</html>
